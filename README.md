@@ -1,2 +1,2 @@
-# Telephone_direcotry
+# Telephone_directory
 Справочник, групповая работа
