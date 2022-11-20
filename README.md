@@ -1,5 +1,6 @@
 # Telephone_directory
 Справочник, групповая работа
+=======
 
 Команда
 Тимошок Антон (тимлид) - https://github.com/atimoshok/Telephone_direcotry
@@ -16,6 +17,7 @@
 
 Описание задачи.
 Создать телефонный справочник с возможностью импорта и экспорта данных в нескольких форматах.
+
 1. Main (Антон)
 2. Contact processing:
 - Add_contact (Иван)
@@ -25,4 +27,6 @@
 3. Display contacts (Иван)
 4. File handling: (Людмила)
 - Fill_from_file (txt, md, csv)
+
+
 - Withdraw_to_file (csv)
