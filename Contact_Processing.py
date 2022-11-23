@@ -20,7 +20,7 @@ def Add_contact():
 
 
 def Delete_contact(base):
-    contact = Search_cont(base)
+    contact = Search_cont(base, input('Что ищем? '))
     if len(contact) == 0:
         print('Такого контакта нет ')
     else:
@@ -29,7 +29,7 @@ def Delete_contact(base):
             print(f'{contact[0]}\n Этот контакт удалён')
         elif len(contact) > 1:
             Print_contacts(contact)
-            choose_contact = int(input('Найдено несколько контактов,какое id удалить - '))
+            choose_contact = int(input('Найдено несколько контактов, какой ID удалить? '))
             print(f'{base[choose_contact - 1]} контакт удалён')
             base.pop(choose_contact - 1)
     return base

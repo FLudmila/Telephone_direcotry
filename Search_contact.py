@@ -1,13 +1,8 @@
-
-
-def Search_cont(contact):
+def Search_cont(contacts, request):
     supername = []
-    x  = input('Что ищем ? ')
-    for items in contact:
-        for y in items:
-            if x == y :
+    for items in contacts:
+        for i in items:
+            if request in str(i):
                 supername.append(items)
+                
     return supername
-
-#  input_data = [['b','имя1','84251653654'],
-#                ['фамимлия2','имя2','6576573']]

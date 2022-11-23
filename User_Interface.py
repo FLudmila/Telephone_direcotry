@@ -1,6 +1,7 @@
 from Contact_Processing import Add_contact, Delete_contact, Sort_base_id
 from File_handling import write_con, read_con
 from Display_Contacts import Print_contacts
+from Search_contact import Search_cont
 
 
 def User_Comand(base):
@@ -17,7 +18,6 @@ def User_Comand(base):
         contact = Add_contact()
         contact.insert(0, len(base) + 1)
         base.append(contact)
-        return comand, *base
     elif comand == 2:
         try:
             base_from_file = read_con(input('Введите имя файла: '))
@@ -26,18 +26,21 @@ def User_Comand(base):
             base = Sort_base_id(base)
         except:
             print('[!] Файла с таким именем не существует')
-        return comand, *base
     elif comand == 3:
         base = Delete_contact(base)
         base = Sort_base_id(base)
-        return comand, *base
     elif comand == 4:
         write_con(base, input('Введите имя файла с раширением: '))
-        return comand, *base
     elif comand == 5:
         Print_contacts(base)
-        return comand, *base
+    elif comand == 6:
+        search_result = Search_cont(base, input('Что ищем ? '))
+        if len(search_result) > 0:
+            Print_contacts(search_result)
+        else:
+            print('Такого контакта нет.')
     elif comand == 0:
-        return comand, *base
+        print('Работа со справочником завершена.')
     else:
         print('Неправильный режим')
+    return comand, *base
