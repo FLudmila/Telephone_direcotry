@@ -2,7 +2,7 @@
 Справочник, групповая работа
 =======
 
-Команда
+Команда:
 Тимошок Антон (тимлид) - https://github.com/atimoshok
 Лебедев Иван - адрес https://github.com/ivan096096
 Фролова Людмила - адрес https://github.com/FLudmila
