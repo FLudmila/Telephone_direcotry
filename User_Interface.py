@@ -4,7 +4,7 @@ from Display_Contacts import Print_contacts
 
 
 def User_Comand(base):
-    comand = int(input('============== МЕНЮ ==============\n'
+    comand = int(input('\n============== МЕНЮ ==============\n'
                        '| 1 - Добавить контакт вручную   |\n'
                        '| 2 - Добавить контакты из файла |\n'
                        '| 3 - Удалить контакт            |\n'

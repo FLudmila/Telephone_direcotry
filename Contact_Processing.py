@@ -30,8 +30,8 @@ def Delete_contact(base):
         elif len(contact) > 1:
             Print_contacts(contact)
             choose_contact = int(input('Найдено несколько контактов,какое id удалить - '))
-            base.pop(int(contact[choose_contact - 1][0])-1)
-            print(f'{contact[choose_contact - 1]}\n Этот контакт удалён')
+            print(f'{base[choose_contact - 1]} контакт удалён')
+            base.pop(choose_contact - 1)
     return base
 
 def Sort_base_id(base):

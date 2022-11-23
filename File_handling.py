@@ -1,13 +1,14 @@
 from Contact_Processing import Add_contact
 
 
-def write_con(contacts, file_name='telephone_directory.txt'):
+def write_con(contacts, file_name):
   file = open(file_name, 'a', encoding='utf-8')
-  try:
-    for elem in contacts:
-      file.write(f'{str(elem)}\n')
-  finally:
-    file.close()
+  for contact in contacts:
+    for elem in contact:
+      file.write(str(elem) + ';')
+    file.write('\n')
+  file.close()
+  print(f'База успешно записана в "{file_name}".')
 
 
 def read_con(file_name):
@@ -19,4 +20,5 @@ def read_con(file_name):
         break
       contact = line.split(';')
       contacts.append(contact)
+    print(f'База контактов из файла "{file_name}" успешно добавлена.')
   return contacts
