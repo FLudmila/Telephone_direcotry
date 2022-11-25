@@ -1,15 +1,16 @@
-from Contact_Processing import Add_contact
-from File_handling import write_con,reade_con
-from Search_contact import Search_cont
-from Display_Contacts import Print_contacts
-from Contact_Processing import Delete_contact
+from User_Interface import User_Comand
 
 
-#a = Add_contact()
-b = reade_con()
-#c = Search_cont(b)
-#Print_contacts(с)
-#Delete_contact(b)
-delet = Delete_contact(b)
-#Print_contacts(delet)
-write_con(delet)
+def main():
+    base = []
+    try:
+        while True:
+            comand = User_Comand(base)
+            input_comand = comand[0]
+            if input_comand == 0:
+                break
+    except:
+        print('Выбран не верный режим повторите снова')
+
+if __name__ == '__main__':
+    main()

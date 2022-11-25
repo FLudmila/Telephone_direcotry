@@ -2,9 +2,9 @@
 Справочник, групповая работа
 =======
 
-Команда
-Тимошок Антон (тимлид) - https://github.com/atimoshok/Telephone_direcotry
-Лебедев Иван - адрес гитхаб
+Команда:
+Тимошок Антон (тимлид) - https://github.com/atimoshok
+Лебедев Иван - адрес https://github.com/ivan096096
 Фролова Людмила - адрес https://github.com/FLudmila
 
 До 19.11.2022 выполнить:
