@@ -14,6 +14,7 @@ def User_Comand(base):
                        '| 6 - Найти контакт              |\n'
                        '| 0 - Закончить работу           |\n'
                        '==================================\nВыберите режим: '))
+
     if comand == 1:
         contact = Add_contact()
         contact.insert(0, len(base) + 1)
@@ -44,3 +45,4 @@ def User_Comand(base):
     else:
         print('Неправильный режим')
     return comand, *base
+
