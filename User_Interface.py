@@ -45,3 +45,4 @@ def User_Comand(base):
     else:
         print('Неправильный режим')
     return comand, *base
+
