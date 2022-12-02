@@ -5,7 +5,11 @@ from User_Interface import User_Comand
 
 def main():
     try:
-        mode = int(input('1 - Консольный справочник\n2 - Справочник в Телеграм\nВыбрите режим: '))
+        mode = int(input('\n1 - Консольный справочник\n2 - Справочник в Телеграм\nВыбрите режим: '))
+    except:
+        print('[!] Такого режима нет.')
+        main()
+    else:
         if mode == 1:
             base = []
             while True:
@@ -15,8 +19,9 @@ def main():
                     break
         elif mode == 2:
             print('Run Telegram')
-    except:
-        print('[!] Такого режима нет.')
+        else:
+            print('[!] Такого режима нет.')
+            main()
 
 if __name__ == '__main__':
     main()
