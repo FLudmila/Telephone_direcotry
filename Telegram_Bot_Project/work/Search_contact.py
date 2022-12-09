@@ -4,5 +4,6 @@ def Search_cont(contacts, request):
         for i in items:
             if request in str(i):
                 supername.append(items)
+                break
                 
     return supername

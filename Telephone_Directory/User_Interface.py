@@ -1,3 +1,5 @@
+import sys
+sys.path.append('Telegram_Bot_Project\work')
 from Contact_Processing import Add_contact, Delete_contact, Sort_base_id
 from File_handling import write_con, read_con
 from Display_Contacts import Print_contacts
@@ -5,16 +7,19 @@ from Search_contact import Search_cont
 
 
 def User_Comand(base):
-    comand = int(input('\n============== МЕНЮ ==============\n'
-                       '| 1 - Добавить контакт вручную   |\n'
-                       '| 2 - Добавить контакты из файла |\n'
-                       '| 3 - Удалить контакт            |\n'
-                       '| 4 - Запись справочника в файл  |\n'
-                       '| 5 - Вывод справочника на экран |\n'
-                       '| 6 - Найти контакт              |\n'
-                       '| 0 - Закончить работу           |\n'
-                       '==================================\nВыберите режим: '))
-
+    try:
+        comand = int(input('\n============== МЕНЮ ==============\n'
+                        '| 1 - Добавить контакт вручную   |\n'
+                        '| 2 - Добавить контакты из файла |\n'
+                        '| 3 - Удалить контакт            |\n'
+                        '| 4 - Запись справочника в файл  |\n'
+                        '| 5 - Вывод справочника на экран |\n'
+                        '| 6 - Найти контакт              |\n'
+                        '| 0 - Закончить работу           |\n'
+                        '==================================\nВыберите режим: '))
+    except:
+        comand = -1
+        
     if comand == 1:
         contact = Add_contact()
         contact.insert(0, len(base) + 1)
@@ -44,5 +49,6 @@ def User_Comand(base):
         print('Работа со справочником завершена.')
     else:
         print('Неправильный режим')
+    
     return comand, *base
 

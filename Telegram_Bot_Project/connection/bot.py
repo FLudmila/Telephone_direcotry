@@ -19,7 +19,9 @@ def tg_bot():
     keyboard1.row('Добавить контакты из файла', 'Запись справочника в файл')
     keyboard1.row('Вывод справочника на экран', 'Закончить работу')
 
-    @bot.message_handler(commands=['start'])
+    base = []
+    @bot.message_handler(commands = ['start'])
+
     def start_message(message):
         bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
 
