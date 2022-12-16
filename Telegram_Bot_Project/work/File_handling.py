@@ -13,13 +13,14 @@ def write_con(contacts, file_name):
 
 
 def read_con(file_name):
+  separator = input('Каким символом разделены строки? ')
   contacts = []
   with open(file_name, encoding='utf -8') as file:
     while True:
       line = file.readline().rstrip()
       if not line:
         break
-      contact = line.split(';')
+      contact = line.split(separator)
       contacts.append(contact)
     print(f'База контактов из файла "{file_name}" успешно добавлена.')
   return contacts
