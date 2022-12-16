@@ -3,6 +3,9 @@ import logging
 import os
 from telebot import types
 import sys
+
+from get_base import get_base
+=======
 from Telegram_Bot_Project.work.Display_Contacts import Print_contacts
 from Telegram_Bot_Project.work.Contact_Processing import Search_cont, Add_contact, Delete_contact
 from get_base import get_base
@@ -23,10 +26,6 @@ def tg_bot():
     keyboard1.row('Вывод справочника на экран', 'Закончить работу')
 
     base = []
-    @bot.message_handler(commands = ['start'])
-
-    def start_message(message):
-        bot.send_message(message.chat.id, 'Привет, ты написал мне /start', reply_markup=keyboard1)
 
     @bot.message_handler(content_types=['text'])
     def send_text(message):
@@ -34,19 +33,40 @@ def tg_bot():
             contact = bot.send_message(message.chat.id, 'Введите строку в формате\n"ИМЯ ФАМИЛИЯ ТЕЛЕФОН ОПИСАНИЕ":',
                                        reply_markup=keyboard1)
             bot.register_next_step_handler(contact, add_contact_to_base)
+
+
         elif message.text == 'Найти контакт':
-            source_Messege = bot.send_message(message.chat.id, 'Что хотим найти?', reply_markup=keyboard1)
-            bot.register_next_step_handler(source_Messege, Search_cont)
-            bot.send_message(message.chat.id, Search_cont())
-            # bot.send_message(message.chat.id,' Контакт')
-            # bot.send_message(message.from_user.id,f' Контакт{name},{surname},{number_phone},{info}')
+            contact = bot.send_message(message.chat.id, 'Введите кого надо найти',
+                                       reply_markup=keyboard1)
+            bot.register_next_step_handler(contact, Contact_search)
+
         elif message.text == 'Удалить контакт':
             bot.send_message(message.chat.id, "Напиши привет")
+
+
         elif message.text == 'Вывод справочника на экран':
             dictionary = base_to_tg_text()
             bot.send_message(message.chat.id, dictionary)
+
+
+
+        elif message.text == 'Закончить работу':
+            bot.send_message(message.chat.id, "Работа завершена")
+
+    def Contact_search(messageChat):
+        contact_base = get_base()
+        search_contact = messageChat.text
+        contacT = []
+        for elem in contact_base:
+            for i in elem:
+                if i == search_contact:
+                    contacT.append(elem)
+        return contacT
+
+
         elif message.text == 'Закончить работу':
             pass  # Print_contacts(base)
+
 
     def base_to_tg_text():
         contacts = ''
@@ -63,9 +83,15 @@ def tg_bot():
             return contacts
 
 
+    def add_contact_to_base(message):
+        base = get_base()
+        contact = message.text.split()
+
+
     def add_contact_to_base(string):
         base = get_base()
         contact = string.text.split()
+
         contact.insert(0, len(base) + 1)
         base.append(contact)
         file = open('base.txt', 'a', encoding='utf-8')
@@ -74,6 +100,7 @@ def tg_bot():
             file.write(' ')
         file.write('\n')
         file.close()
+
 
 
     def Print_contacts():
@@ -103,21 +130,11 @@ def tg_bot():
         #      return base
 
 
+
         # def add_logging():
         #  logging.basicConfig(
         #     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         #     level=logging.INFO
         # )
-
-        # bot.send_message(message.chat.id, message.text)
-        # def get_text_messages(message):
-        #     f=open('db.txt', 'a')
-        #     f.write(message.text)
-        #     f.close
-
-        # surname = bot.send_message(message.chat.id, 'Введите фамилию:')
-        # number = bot.send_message(message.chat.id, 'Введите телефон:')
-        # elif message.text == 'Пока':
-        #     bot.send_message(message.chat.id, 'Прощай, создатель')
 
     bot.infinity_polling()

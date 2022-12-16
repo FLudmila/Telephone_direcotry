@@ -1,8 +1,8 @@
 import sys
 sys.path.append('Telephone_Directory')
-from User_Interface import User_Comand
+from Telephone_Directory.User_Interface import User_Comand
 sys.path.append(r'Telegram_Bot_Project\connection')
-from bot import tg_bot
+from Telegram_Bot_Project.connection.bot import tg_bot
 
 
 def main():

@@ -4,17 +4,8 @@ from Display_Contacts import Print_contacts
 
 def Add_contact():
     contact  = []
-    name = input('Введите имя контакта - ')
-    contact.append(name)
-    supername = input('Введите фамилию контакта - ')
-    contact.append(supername)
-    try:
-        number_phone = int(input('Введите номер телефона - '))
-    except:
-        number_phone = int(input('[!] Номер должен содержать только цифры. Введите номер телефона - '))
-    contact.append(number_phone)
-    info = input('Введите информацию о контакте - ')
-    contact.append(info)
+    name_surname_number_phone = input('Введите имя, контакта - ').split()
+    contact.append(name_surname_number_phone)
     print(f'Контакт {contact} добавлен в справочник')
     return contact
 
