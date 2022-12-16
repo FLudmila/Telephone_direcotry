@@ -3,7 +3,13 @@ import logging
 import os
 from telebot import types
 import sys
+
 from get_base import get_base
+=======
+from Telegram_Bot_Project.work.Display_Contacts import Print_contacts
+from Telegram_Bot_Project.work.Contact_Processing import Search_cont, Add_contact, Delete_contact
+from get_base import get_base
+
 
 sys.path.append('Telegram_Bot_Project\work')
 
@@ -43,6 +49,7 @@ def tg_bot():
             bot.send_message(message.chat.id, dictionary)
 
 
+
         elif message.text == 'Закончить работу':
             bot.send_message(message.chat.id, "Работа завершена")
 
@@ -55,6 +62,11 @@ def tg_bot():
                 if i == search_contact:
                     contacT.append(elem)
         return contacT
+
+
+        elif message.text == 'Закончить работу':
+            pass  # Print_contacts(base)
+
 
     def base_to_tg_text():
         contacts = ''
@@ -70,9 +82,16 @@ def tg_bot():
                     contacts = contacts + line + '\n'
             return contacts
 
+
     def add_contact_to_base(message):
         base = get_base()
         contact = message.text.split()
+
+
+    def add_contact_to_base(string):
+        base = get_base()
+        contact = string.text.split()
+
         contact.insert(0, len(base) + 1)
         base.append(contact)
         file = open('base.txt', 'a', encoding='utf-8')
@@ -81,6 +100,36 @@ def tg_bot():
             file.write(' ')
         file.write('\n')
         file.close()
+
+
+
+    def Print_contacts():
+         Base = []
+         read_file = open('file_name.txt', 'r')
+         for line in read_file:
+            Base.append(line).split()
+            read_file.close()
+            return Base
+        #
+        # @bot.message_handler(content_types=['text'])
+        # def Search_cont(base):
+        #     contacts = add_contact_to_base()
+        #     name = contacts[1]
+        #     surname = contacts[2]
+        #     number_phone = contacts[3]
+        #     info = contacts[4]
+        #     bot.send_message(contacts.chat.id,f' Контакт{name},{surname},{number_phone},{info}')
+        #
+        #       return base
+
+        # def Search_cont(contacts):
+        #     base = []
+        #     for items in contacts:
+        #          base.append(items)
+        #
+        #      return base
+
+
 
         # def add_logging():
         #  logging.basicConfig(
