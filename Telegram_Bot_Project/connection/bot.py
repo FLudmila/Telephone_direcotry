@@ -13,17 +13,15 @@ sys.path.append('Telegram_Bot_Project\work')
 
 
 def tg_bot():
-    # API_TOKEN = '5943741465:AAEfm9wHXbsoZnexiRpbJlrjbMwakXsDBL4'
     API_TOKEN = '5765171209:AAE9j_s90u8L9IUxhK4EukyEuI0nHM04o3A'
 
     bot = telebot.TeleBot(API_TOKEN)
 
     keyboard1 = telebot.types.ReplyKeyboardMarkup()
     keyboard1.row('Добавить контакт', 'Найти контакт', 'Удалить контакт')
-    keyboard1.row('Добавить контакты из файла', 'Запись справочника в файл')
-    keyboard1.row('Вывод справочника на экран', 'Закончить работу')
+    keyboard1.row('Вывод справочника на экран')
+    # keyboard1.row('Добавить контакты из файла', 'Запись справочника в файл')
 
-    base = []
     global res
 
     @bot.message_handler(content_types=['text'])
@@ -35,6 +33,7 @@ def tg_bot():
         elif message.text == 'Найти контакт':
             contact = bot.send_message(message.chat.id, 'Введите кого надо найти',
                                        reply_markup=keyboard1)
+            print(contact)
             bot.register_next_step_handler(contact, Contact_search)
         elif message.text == 'Удалить контакт':
             contact = bot.send_message(message.chat.id, 'Введите кто будет удалён',
@@ -43,8 +42,8 @@ def tg_bot():
         elif message.text == 'Вывод справочника на экран':
             dictionary = base_to_tg_text()
             bot.send_message(message.chat.id, dictionary)
-        elif message.text == 'Закончить работу':
-            bot.send_message(message.chat.id, "Работа завершена")
+        else:
+            bot.send_message(message.chat.id, 'Я пока не знаю такой команды')
 
     def Delete_contacts(message):
         contact_base = get_base()
@@ -55,7 +54,6 @@ def tg_bot():
                 if delete_contact.lower() in i.lower():
                     contact.append(elem)
                     break
-
         print(len(contact))
         if len(contact) == 1:
             print(contact)
@@ -67,13 +65,17 @@ def tg_bot():
             print(contact)
             res = list_to_tg_text(contact)
             print(res)
-            bot.send_message(message.chat.id, f'Найдено несколько контактов, какой ID удалить?\n\n{res}')
-            bot.register_next_step_handler(message.text, Delete_contact)
-
+            id_from_user = bot.send_message(message.chat.id, f'{res}\n\nНайдено несколько контактов, какой ID удалить?')
+            bot.register_next_step_handler(id_from_user, Delete_contact)
+        
     def Delete_contact(id_from_user):
-        new_id = str(id_from_user)
-        print(new_id)
         contact_base = get_base()
+        if not isinstance(id_from_user, str):
+            new_id = id_from_user.text
+            bot.send_message(id_from_user.chat.id, f'Контакт {contact_base[int(new_id) - 1]} удалён')
+        else:
+            new_id = id_from_user
+        print(new_id)
         contact_base.pop(int(new_id) - 1)
         sorted_contact_base = Sort_base_id(contact_base)
         with open('base.txt', 'w', encoding='utf-8') as base:
@@ -130,40 +132,6 @@ def tg_bot():
             file.write(' ')
         file.write('\n')
         file.close()
-
-
-    def Print_contacts():
-         Base = []
-         read_file = open('file_name.txt', 'r')
-         for line in read_file:
-            Base.append(line).split()
-            read_file.close()
-            return Base
-        #
-        # @bot.message_handler(content_types=['text'])
-        # def Search_cont(base):
-        #     contacts = add_contact_to_base()
-        #     name = contacts[1]
-        #     surname = contacts[2]
-        #     number_phone = contacts[3]
-        #     info = contacts[4]
-        #     bot.send_message(contacts.chat.id,f' Контакт{name},{surname},{number_phone},{info}')
-        #
-        #       return base
-
-        # def Search_cont(contacts):
-        #     base = []
-        #     for items in contacts:
-        #          base.append(items)
-        #
-        #      return base
-
-
-
-        # def add_logging():
-        #  logging.basicConfig(
-        #     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-        #     level=logging.INFO
-        # )
+        bot.send_message(string.chat.id, f'Контакт {contact} добавлен')
 
     bot.infinity_polling()
